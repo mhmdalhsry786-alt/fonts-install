@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>تثبيت Fonts 7.1.2</title>
+<style>
+  :root{color-scheme:dark}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#000;color:#f2f2f7;
+       font-family:-apple-system,system-ui,"SF Arabic","Segoe UI",sans-serif;padding:24px}
+  .card{width:100%;max-width:420px;text-align:center}
+  .icon{width:96px;height:96px;border-radius:22px;background:#111;border:1px solid #2a2a30;
+        margin:0 auto 18px;display:grid;place-items:center;font-size:44px}
+  h1{font-size:22px;margin:0 0 6px;font-weight:700}
+  .sub{color:#8e8e93;font-size:14px;line-height:1.7;margin:0 0 22px}
+  .btn{display:block;width:100%;padding:16px;border-radius:14px;background:#0a84ff;color:#fff;
+       font-size:17px;font-weight:700;text-decoration:none;border:0;cursor:pointer}
+  .btn:active{opacity:.8}
+  .alt{display:block;margin-top:12px;padding:14px;border-radius:14px;background:#1c1c1e;
+       color:#f2f2f7;text-decoration:none;font-size:15px;border:1px solid #2a2a30}
+  .warn{margin-top:20px;padding:14px;border-radius:12px;background:#1a1408;border:1px solid #3a2c0a;
+        color:#ffd60a;font-size:13px;line-height:1.8;text-align:right}
+  .ok{color:#30d158}
+  code{background:#1c1c1e;padding:2px 6px;border-radius:6px;font-size:12px;color:#8e8e93}
+  ul{text-align:right;color:#8e8e93;font-size:13px;line-height:2;padding-inline-start:18px;margin:10px 0 0}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">🅰️</div>
+  <h1>Fonts — 7.1.2</h1>
+  <p class="sub">حزمة <code>fontskeyboard.fonts</code> · 33.4MB · iPhone + iPad</p>
+
+  <a class="btn" id="go" href="#">تثبيت الآن</a>
+
+  <div class="warn" id="box">
+    <b>قبل أن تضغط:</b> سيطلب آيفون تثبيت ملف تعريف/تطبيق — اقبل، ثم اذهب إلى
+    الإعدادات ← عام ← VPN وإدارة الجهاز ← ثق بالمطوّر إن ظهر.
+  </div>
+
+  <a class="alt" id="alt2" href="#">محاولة ثانية بصيغة أخرى (manifest.plist)</a>
+  <a class="alt" href="https://apps.apple.com/app/id1454061614">أو ثبّت النسخة الرسمية من App Store</a>
+
+  <ul>
+    <li>الصفحة تعمل فقط داخل <b>Safari</b> على iPhone/iPad.</li>
+    <li>لو ظهر «Unable to Download App» فالسبب شهادة التوقيع لا الرابط.</li>
+  </ul>
+</div>
+<script>
+  var IPA = "https://mhmdalhsry786-alt.github.io/fonts-install/Fonts.ipa";
+  var MFP = "https://mhmdalhsry786-alt.github.io/fonts-install/manifest.xml";
+  var link = "itms-services://?action=download-manifest&url=" + encodeURIComponent(MFP);
+  document.getElementById("alt2").setAttribute("href",
+    "itms-services://?action=download-manifest&url=" + encodeURIComponent(
+      "https://mhmdalhsry786-alt.github.io/fonts-install/manifest.plist"));
+  document.getElementById("go").setAttribute("href", link);
+  document.getElementById("go").addEventListener("click", function(){
+    document.getElementById("box").innerHTML =
+      "<b>بدأ الطلب.</b> إن ظهرت رسالة خطأ خلال ثوانٍ، فهو رفض توقيع من iOS — لا مشكلة في الرابط.";
+  });
+</script>
+
+<div id="notsafari" style="display:none;margin-top:16px;padding:14px;border-radius:12px;background:#1c0f0f;border:1px solid #4a1a1a;color:#ff6961;font-size:13px;line-height:1.9;text-align:right">
+  <b>أنت لا تفتح هذه الصفحة من Safari.</b><br>
+  متصفح التطبيقات (واتساب، تيليجرام، إنستغرام…) لا يستطيع تشغيل التثبيت.<br>
+  انسخ هذا العنوان والصقه في شريط عنوان <b>Safari</b>:<br>
+  <span id="urltxt" style="display:block;margin-top:8px;padding:10px;background:#000;border-radius:8px;color:#0a84ff;font-size:12px;word-break:break-all;direction:ltr;text-align:left"></span>
+</div>
+<div id="diag" style="margin-top:14px;font-size:11px;color:#48484a;direction:ltr;text-align:left"></div>
+<script>
+(function(){
+  var ua=navigator.userAgent||"";
+  var isIOS=/iPhone|iPad|iPod/.test(ua);
+  var isSafari=isIOS && /Safari\//.test(ua) && !/CriOS|FxiOS|EdgiOS|GSA|FBAN|FBAV|Instagram|WhatsApp|Telegram|Line\//.test(ua);
+  var standalone = window.navigator.standalone===true;
+  if(!isSafari || !isIOS){
+    var n=document.getElementById("notsafari");
+    n.style.display="block";
+    document.getElementById("urltxt").textContent=location.href;
+  }
+  document.getElementById("diag").textContent =
+    "iOS:"+isIOS+" · safari:"+isSafari+" · ua:"+ua.slice(0,90);
+})();
+</script>
+</body>
+</html>
